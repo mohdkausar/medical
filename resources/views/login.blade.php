@@ -28,8 +28,8 @@
 
 					<a href="http://html.iwthemes.com/mas/register.html" class="btn btn-red register" role="button">Create a new account - Dashboard</a>
 					<span class="help">
-						<a href="http://html.iwthemes.com/mas/forgot-pass.html">¿Forgot Password?</a>
-						<a href="http://html.iwthemes.com/mas/help.html" class="help-link">¿Help?</a>
+						<a href="http://html.iwthemes.com/mas/forgot-pass.html">Forgot Password?</a>
+						<a href="http://html.iwthemes.com/mas/help.html" class="help-link">Help?</a>
 					</span>
 				</div>
 			</div>

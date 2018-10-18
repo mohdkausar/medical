@@ -3,7 +3,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="logo">
-					<a href="index.html"><img src="img/logo-white.png" alt="logo main" class="img-responsive"></a>
+					<a href="/"><img src="img/logo-white.png" alt="logo main" class="img-responsive"></a>
 				</div>
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

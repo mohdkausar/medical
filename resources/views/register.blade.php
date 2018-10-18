@@ -7,100 +7,77 @@
 
 				<div class="data-form">
 					<span class="back-to-login">
-						<a class="btn btn-green btn-xsmall" href="http://html.iwthemes.com/mas/login.html"><i class="fa fa-angle-double-left"></i> Back to Login</a>
+						<a class="btn btn-green btn-xsmall" href="login"><i class="fa fa-angle-double-left"></i> Back to Login</a>
 					</span>
-
 					<a href="#" class="logo"><img src="img/logo-simple.png" alt="logo"></a>
-
-
 					<div class="form-login">
-						<form>
-
+						@if ($errors->any())
+						    <div class="alert alert-danger">
+						        <ul>
+						            @foreach ($errors->all() as $error)
+						                <li>{{ $error }}</li>
+						            @endforeach
+						        </ul>
+						    </div>
+						@endif
+						<form name="registeration-form" id="registeration-form" action="saveUser" enctype="multipart/form-data" method="POST">
+							@csrf
 							<div class="row">
 								<h3>Personal Information</h3>
 								<div class="datapos">
-
-									<div class="icon-data">
-										<i class="fa fa-address-card"></i>
-									</div>
-									<select>
-										<option>Select a Document</option>
-										<option>nit</option>
-									</select>
-
-
 									<div class="icon-data">
 										<i class="fa fa-user"></i>
 									</div>
-									<input type="text" placeholder="Your name">
-
+									<input type="text" id="first_name" name="first_name" placeholder="Your First name" value="{{old('first_name')}}">
 
 									<div class="icon-data">
-										<i class="fa fa-phone"></i>
+										<i class="fa fa-phone"></i>										
 									</div>
-									<input type="number" placeholder="Your Phone">
+									<input type="number" name="phone" id="phone" placeholder="Your Phone" value="{{old('phone')}}">
 
-
+									<div class="icon-data"></div>
 									<label>
-										<input type="radio" name="inlineRadioOptions" value="female"> <span>Female</span>
+										Are you Male or Female? {{ old('gender') }}
+										<input type="radio" name="gender" id="male" value="male"  {{ old('gender')=="male" ? 'checked' : '' }} > Male
 									</label>
 									<label>
-										<input type="radio" name="inlineRadioOptions" value="male"> Male
+										<input type="radio" name="gender" id="female" value="female" {{ old('gender')=="female" ? 'checked' : '' }}> <span>Female</span>
 									</label>
-
 								</div>
 								<div class="datapos">
-
-									<div class="icon-data">
-										<i class="fa fa-user-circle"></i>
-									</div>
-									<input type="number" placeholder="Number Document">
-
-
 									<div class="icon-data">
 										<i class="fa fa-user"></i>
 									</div>
-									<input type="text" placeholder="Last name">
-
-
+									<input type="text" placeholder="Your Last name" id="last_name" name="last_name" value="{{old('last_name')}}">
+									
 									<div class="icon-data">
-										<i class="fa fa-phone"></i>
+										<i class="fa fa-envelope"></i>
 									</div>
-									<input type="number" placeholder="Alternative Phone">
+									<input type="email" placeholder="Your email" id="email" name="email" value="{{old('email')}}">
 
+									<!-- <div class="icon-data">
+										<i class="fa fa-user"></i>
+									</div>
+									<input type="file" name="avatar" id="avatar" accept="image/*"> -->
+									
 								</div>
 							</div>
 
-
 							<div class="row">
-								<h3>Data Information</h3>
+								<h3>Secret Information</h3>
 								<div class="datapos">
 
 									<div class="icon-data">
-										<i class="fa fa-user"></i>
+										<i class="fa fa-key"></i>
 									</div>
-									<input type="text" placeholder="Username">
-
-
-									<div class="icon-data">
-										<i class="fa fa-user-circle"></i>
-									</div>
-									<input type="password" placeholder="Confirm Password">
-
-
-									<div class="avatar-profile">
-										<label>Image Profile</label>
-										<input type="file" name="pic" accept="image/*">
-									</div>
-
+									<input type="password" placeholder="Password" name="password" id="password" value="{{old('password')}}">
+									
 								</div>
 								<div class="datapos">
-
 									<div class="icon-data">
-										<i class="fa fa-user-circle"></i>
+										<i class="fa fa-key"></i>
 									</div>
-									<input type="password" placeholder="Password">
-
+									<input type="password" placeholder="Confirm Password" name="password_confirmation" id="password_confirmation">
 								</div>
 							</div>
 
@@ -120,14 +97,12 @@
 										</ul>
 									</div>
 									<label>
-										<input type="checkbox" value="option"> Accept the Terms and Conditions
+										<input type="checkbox" value="1" name="terms_conditions" id="terms_conditions" {{ old('terms_conditions')=="1" ? 'checked' : '' }}> Accept the Terms and Conditions
 									</label>
 								</div>
 							</div>
-							<button class="btn btn-default">Create Account</button>
-							<span class="help">
-								<a href="http://html.iwthemes.com/mas/help.html" class="help-link">¿Help?</a>
-							</span>
+							<!-- <input type="text" name="_token" value="{{ csrf_token() }}"> -->
+							<button class="btn btn-default" type="submit">Create Account</button>
 						</form>
 					</div>
 

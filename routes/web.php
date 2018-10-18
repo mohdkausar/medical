@@ -18,6 +18,10 @@ Route::get('/', 'HomeController@home');
 Route::get('/login', 'UserController@login');
 Route::get('/register', 'UserController@register');
 Route::get('/password', 'UserController@forgotPassword');
+Route::post('/saveUser', 'UserController@saveUser');
+Route::get("/thanks_user",function(){
+	return view('thanks_user');
+});
 
 // Route::middleware('user')->group(function () {
 // 	Route::get('/login', 'UserController@login');
