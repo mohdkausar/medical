@@ -1,77 +1,138 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+<section class="register-section">
+    <div class="login">
+        <div class="container">
+            <div class="register-form">
+                <div class="data-form">
+                    <span class="back-to-login">
+                        <a class="btn btn-green btn-xsmall" href="login"><i class="fa fa-angle-double-left"></i> Back to Login</a>
+                    </span>
+                    <a href="#" class="logo"><img src="img/logo-simple.png" alt="logo"></a>
+                    <div class="form-login">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-                        </div>
+                        @endif
+                        <form name="registeration-form" id="registeration-form" action="{{ route('register') }}" enctype="multipart/form-data" method="POST">
+                            @csrf
+                            <div class="row">
+                                <h3>Personal Information</h3>
+                                <div class="datapos">
+                                    <div class="icon-data">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input id="first_name" placeholder="Your First Name" type="text" class="{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required autofocus>
+                                    <!-- <input type="text" id="first_name" name="first_name" placeholder="Your First name" value="{{old('first_name')}}"> -->
+                                    @if ($errors->has('name'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    <div class="icon-data">
+                                        <i class="fa fa-phone"></i>                                     
+                                    </div>
+                                    <input type="number" name="phone" id="phone" placeholder="Your Phone" value="{{old('phone')}}">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                    <div class="icon-data"></div>
+                                    <label>
+                                        Are you a Male or Female? {{ old('gender') }}
+                                        <input type="radio" name="gender" id="male" value="male"  {{ old('gender')=="male" ? 'checked' : '' }} > Male
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="gender" id="female" value="female" {{ old('gender')=="female" ? 'checked' : '' }}> <span>Female</span>
+                                    </label>
+                                </div>
+                                <div class="datapos">
+                                    <div class="icon-data">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input id="last_name" type="text" placeholder="Your Last Name" class="{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required>
+                                    @if ($errors->has('last_name'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('last_name') }}</strong>
+                                        </span>
+                                    @endif
+                                    
+                                    <div class="icon-data">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+                                    <input id="email" type="email" placeholder="Your Email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+
+                                    <!-- <div class="icon-data">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="file" name="avatar" id="avatar" accept="image/*"> -->
+                                    
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <div class="row">
+                                <h3>Secret Information</h3>
+                                <div class="datapos">
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                    <div class="icon-data">
+                                        <i class="fa fa-key"></i>
+                                    </div>
+                                    <input id="password" type="password" placeholder="Your Password" class="{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                                    @if ($errors->has('password'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                    
+                                </div>
+                                <div class="datapos">
+                                    <div class="icon-data">
+                                        <i class="fa fa-key"></i>
+                                    </div>
+                                    <input id="password-confirm" type="password" placeholder="Confirm Password" name="password_confirmation" required>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            <div class="row">
+                                <h3>terms and conditions</h3>
+                                <div class="terms-conditions">
+                                    <div class="content-terms">
+                                        <p>These Website Standard Terms and Conditions written on this webpage shall manage your use of this website. These Terms will be applied fully and affect to your use of this Website. By using this Website, you agreed to accept all terms and conditions written in here. You must not use this Website if you disagree with any of these Website Standard Terms and Conditions.</p>
+                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+                                        <p>These Website Standard Terms and Conditions written on this webpage shall manage your use of this website. These Terms will be applied fully and affect to your use of this Website. By using this Website, you agreed to accept all terms and conditions written in here. You must not use this Website if you disagree with any of these Website Standard Terms and Conditions.</p>
+                                        <p>Minors or people below 18 years old are not allowed to use this Website.</p>
+                                        <ul>
+                                            <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
+                                            <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
+                                            <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
+                                            <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
+                                        </ul>
+                                    </div>
+                                    <label>
+                                        <input type="checkbox" value="1" name="terms_conditions" id="terms_conditions" {{ old('terms_conditions')=="1" ? 'checked' : '' }}> Accept the Terms and Conditions
+                                    </label>
+                                </div>
                             </div>
-                        </div>
+                            <!-- <input type="text" name="_token" value="{{ csrf_token() }}"> -->
+                            <button class="btn btn-default" type="submit">Create Account</button>
+                        </form>
+                    </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
+
             </div>
         </div>
     </div>
-</div>
+</section>
 @endsection
