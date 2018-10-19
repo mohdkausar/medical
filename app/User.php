@@ -5,10 +5,10 @@
  * Date: Thu, 18 Oct 2018 13:44:15 +0000.
  */
 
-namespace App\Models;
+namespace App;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
-
+use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * Class User
  * 
@@ -25,7 +25,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class User extends Eloquent
+class User extends Authenticatable
 {
 	protected $primaryKey = 'user_id';
 	public $timestamps = false;

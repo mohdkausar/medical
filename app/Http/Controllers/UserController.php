@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Http\Controllers\Auth
+// use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -46,6 +48,37 @@ class UserController extends Controller
         	            ->withErrors($validator)
         	            ->withInput();
         }
+    }
+
+    public function loginUser(Request $request){
+    	$rules = $request->validate([
+	       'email' => 'required|email',
+	       'password' => 'required|min:8|max:32',
+	    ]);
+	    $validator = Validator::make(Input::all(), $rules);
+
+	    // if the validator fails, redirect back to the form
+	    if (!is_array($validator) && $validator->fails()) {
+	        return Redirect::to('login')
+	            ->withErrors($validator) // send back all errors to the login form
+	            ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+	    } else {
+	        // create our user data for the authentication
+	        $userdata = array(
+	            'email'     => $request->input('email'),
+	            'password'  => $request->input('password')
+	        );
+
+	        // attempt to do the login
+            if (Auth::attempt($userdata)) {
+                return Redirect::to('facility/dashboard');
+
+            } else {        
+                // validation not successful, send back to form 
+                return Redirect::to('login');
+
+            }
+
     }
 
     public function validateUser($request){

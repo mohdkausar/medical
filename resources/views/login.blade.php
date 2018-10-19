@@ -6,30 +6,21 @@
 			<div class="login-form" style="float: none;margin: 0 auto;">
 				<div class="data-form">
 					<a href="#" class="logo"><img src="img/logo-simple.png" alt="logo" class="img-responsive"></a>
-					<form class="form-login">
+					<form class="form-login" name="login_form" id="login_form" action="login" method="POST">
+						@csrf
 						<div class="icon-data">
-							<i class="fa fa-address-card"></i>
+							<i class="fa fa-user"></i>
 						</div>
-						<select>
-							<option>Select a Document</option>
-							<option>id number</option>
-						</select>
-						<div class="icon-data">
-							<i class="fa fa-user-circle"></i>
-						</div>
-						<input type="number" placeholder="Number Document">
+						<input type="email" placeholder="Enter your email" name="email" id="email">
 						<div class="icon-data">
 							<i class="fa fa-key"></i>
 						</div>
-						<input type="password" placeholder="Password">
-						<a href="http://html.iwthemes.com/mas/appointments-reserved.php" class="btn btn-default" role="button">Login - Dashboard</a>
-
+						<input type="password" placeholder="Enter your password" name="password" id="password" />
+						<button type="submit" class="btn btn-default" role="button">Login</button>
 					</form>
-
-					<a href="http://html.iwthemes.com/mas/register.html" class="btn btn-red register" role="button">Create a new account - Dashboard</a>
+					<a href="http://html.iwthemes.com/mas/register.html" class="btn btn-red register" role="button">Create a new account</a>
 					<span class="help">
 						<a href="http://html.iwthemes.com/mas/forgot-pass.html">Forgot Password?</a>
-						<a href="http://html.iwthemes.com/mas/help.html" class="help-link">Help?</a>
 					</span>
 				</div>
 			</div>
